@@ -196,7 +196,7 @@ def message_hook(data, bufferp, uber_empty, tagsn, is_displayed, is_highlighted,
 
 def http_request_callback(data, url, status, response, err):
     j = json.loads(response)
-    if j['status'] != '1':
+    if j['status'] != 1:
         w.prnt('', '[weepushover] error: {}'.format(response))
         return w.WEECHAT_RC_ERROR
 
