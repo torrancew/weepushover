@@ -36,6 +36,7 @@ help_text = '''
 settings: (prefix with plugins.var.python.weepushover.<setting>)
     token                 your application token (required)
     user                  your user token (required)
+    url                   URL to open (default: https://glowing-bear.com)
     ignored_channels      space-separated list of channels to ignore
     subscribed_channels   space-separated list of channels to subscribe to
     away_only             send only when marked as away
@@ -48,6 +49,7 @@ settings: (prefix with plugins.var.python.weepushover.<setting>)
 configs = {                      # some sane defaults
     'token': '_required',
     'user': '_required',
+    'url': 'https://glowing-bear.org',
     'ignored_channels': '',      # no ignored channels
     'subscribed_channels': '',   # no subscribed channels
     'away_only': '1',            # send only when away
@@ -209,7 +211,7 @@ def send_push(title, message):
         'user': w.config_get_plugin('user'),
         'title': title,
         'message': message,
-        'url': 'https://glowing-bear.org',
+        'url': w.config_get_plugin('url'),
     }
 
     w.hook_process_hashtable(
