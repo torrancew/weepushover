@@ -23,7 +23,7 @@
 
 import json
 import re
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import time
 
 import weechat as w
@@ -73,7 +73,7 @@ def register():
 
 
 def load_settings():
-    for (option, default_value) in configs.items():
+    for (option, default_value) in list(configs.items()):
         if w.config_get_plugin(option) == '':
             if configs[option] == '_required':
                 w.prnt('', 'missing plugins.var.python.weepushover.{}'.format(option))
@@ -214,7 +214,7 @@ def send_push(title, message):
 
     w.hook_process_hashtable(
         'url:https://api.pushover.net/1/messages.json',
-        {'postfields': urllib.urlencode(postfields)},
+        {'postfields': urllib.parse.urlencode(postfields)},
         20*1000,
         'http_request_callback',
         '',
