@@ -138,7 +138,7 @@ def interval_limit_check():
 def get_buf_name(bufferp):
     short_name = w.buffer_get_string(bufferp, 'short_name')
     name = w.buffer_get_string(bufferp, 'name')
-    return (short_name or name).decode('utf-8')
+    return (short_name or name)
 
 
 def is_ignored(bufferp):
@@ -182,11 +182,11 @@ def message_hook(data, bufferp, uber_empty, tagsn, is_displayed, is_highlighted,
     debug('passed all checks')
 
     if is_pm:
-        title = 'Private message from {}'.format(prefix.decode('utf-8'))
+        title = 'Private message from {}'.format(prefix)
     else:
-        title = 'Message on {} from {}'.format(get_buf_name(bufferp), prefix.decode('utf-8'))
+        title = 'Message on {} from {}'.format(get_buf_name(bufferp), prefix)
 
-    send_push(title=title, message=message.decode('utf-8'))
+    send_push(title=title, message=message)
 
     global last_notification
     last_notification = time.time()
